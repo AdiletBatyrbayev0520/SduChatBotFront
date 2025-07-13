@@ -246,7 +246,7 @@ class TextFormatterParsers {
     if (currentItem !== null) {
       listItems.push({
         number: currentNumber!,
-        content: currentItem.trim()
+        content: currentItem!.trim()
       });
     }
     
