@@ -214,16 +214,16 @@ class TextFormatterParsers {
       
       if (match) {
         // Save previous item if exists
-        if (currentItem !== null) {
+        if (currentItem) {
           listItems.push({
             number: currentNumber!,
-            content: currentItem!.trim()
+            content: currentItem.trim()
           });
         }
         // Start new item
         currentNumber = match[1];
         currentItem = content;
-      } else if (currentItem !== null && line.trim()) {
+      } else if (currentItem && line.trim()) {
         // Continue current item (multi-line support)
         // Check if line starts with a dash (sub-item)
         if (line.trim().startsWith('-')) {
@@ -231,11 +231,11 @@ class TextFormatterParsers {
         } else {
           currentItem += ' ' + line.trim();
         }
-      } else if (!line.trim() && currentItem !== null) {
+      } else if (!line.trim() && currentItem) {
         // Empty line ends current item
         listItems.push({
           number: currentNumber!,
-          content: currentItem!.trim()
+          content: currentItem.trim()
         });
         currentItem = null;
         currentNumber = null;
@@ -243,10 +243,10 @@ class TextFormatterParsers {
     });
     
     // Don't forget last item
-    if (currentItem !== null) {
+    if (currentItem) {
       listItems.push({
         number: currentNumber!,
-        content: currentItem!.trim()
+        content: currentItem.trim()
       });
     }
     
