@@ -214,7 +214,7 @@ class TextFormatterParsers {
       
       if (match) {
         // Save previous item if exists
-        if (currentItem) {
+        if (currentItem !== null) {
           listItems.push({
             number: currentNumber!,
             content: currentItem.trim()
@@ -223,7 +223,7 @@ class TextFormatterParsers {
         // Start new item
         currentNumber = match[1];
         currentItem = content;
-      } else if (currentItem && line.trim()) {
+      } else if (currentItem !== null && line.trim()) {
         // Continue current item (multi-line support)
         // Check if line starts with a dash (sub-item)
         if (line.trim().startsWith('-')) {
@@ -231,7 +231,7 @@ class TextFormatterParsers {
         } else {
           currentItem += ' ' + line.trim();
         }
-      } else if (!line.trim() && currentItem) {
+      } else if (!line.trim() && currentItem !== null) {
         // Empty line ends current item
         listItems.push({
           number: currentNumber!,
@@ -243,7 +243,7 @@ class TextFormatterParsers {
     });
     
     // Don't forget last item
-    if (currentItem) {
+    if (currentItem !== null) {
       listItems.push({
         number: currentNumber!,
         content: currentItem.trim()
