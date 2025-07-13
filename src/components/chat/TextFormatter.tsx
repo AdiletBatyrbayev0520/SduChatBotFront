@@ -217,7 +217,7 @@ class TextFormatterParsers {
         if (currentItem !== null) {
           listItems.push({
             number: currentNumber!,
-            content: currentItem.trim()
+            content: currentItem!.trim()
           });
         }
         // Start new item
@@ -235,7 +235,7 @@ class TextFormatterParsers {
         // Empty line ends current item
         listItems.push({
           number: currentNumber!,
-          content: currentItem.trim()
+          content: currentItem!.trim()
         });
         currentItem = null;
         currentNumber = null;
